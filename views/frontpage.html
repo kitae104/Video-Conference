@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Video Conference</title>
+    <link rel="icon" type="image/x-icon" href="../public/image-assets/logo-favicon.png">
+    <link rel="stylesheet" href="../public/css/style-frontpage.css">
+</head>
+<body>
+    <div id="container">
+        <div id="form">
+            <div class="front">
+                <div class="top-content">
+                    <br><br>
+                    <h3 style="color: #fd6f13;">START MEETING</h3><br>
+                    <p>대화방을 생성하고 사람들을 만나세요~ <br>
+                        <b>시작하세요!</b>
+                    </p><br><br><br>
+                    <input class="textfield nameIcon" id="startun" type="text" placeholder="이름을 입력하세요 ...">
+                    <input class="textfield passIcon" id="startpc" type="password" placeholder="코드를 입력하세요 ...">
+                    <input class="start" type="button" value="GO !" onclick="newRoom()">
+                    <p id="or" class="or-start">OR</p>
+                </div>
+                <div class="bot-content">
+                    <br><br>
+                    <p style="color: #ffffff;">
+                        회의에 초대되었나요?
+                        <a href="#" onclick="flipToBack()" style="color: #ffffff; font-weight: bold; text-decoration: none;">
+                            Join now.
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="top-content">
+                    <br><br>
+                    <h3 style="color: #fd6f13;">JOIN MEETING</h3><br>
+                    <p>
+                        초대장을 입력하고 사람들을 만나보세요. <br>
+                        <b style="color: #fefefe;">시작하세요!!</b>
+                    </p><br><br>
+                    <input class="textfield nameIcon" id="joinun" type="text" placeholder="이름을 입력하세요 ...">
+                    <input class="textfield inviteIcon" id="joininv" type="text" placeholder="당신의 초대장 ...">
+                    <input class="textfield passIcon" id="joinpc" type="password" placeholder="코드를 사용하세요 ...">
+                    <input class="join" type="button" value="GO !" onclick="joinRoom()">
+                    <p id="or" class="or-join">OR</p>
+                </div> 
+                <div class="bot-content">
+                    <br><br>
+                    <p style="color: #ffffff;">
+                        새로운 모임을 만들까요?
+                        <a href="#" onclick="flipToFront()" style="color: #ffffff; font-weight: bold; text-decoration: none;">
+                            Start now.
+                        </a>
+                    </p>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        function flipToBack() {
+            document.getElementById("form").style.transform = 'rotateY(180deg)';
+        }
+        function flipToFront() {
+            document.getElementById("form").style.transform = 'rotateY(0deg)';
+        }
+
+        function newRoom() {
+            var un = document.getElementById("startun").value;
+            var pc = document.getElementById("startpc").value;
+            location.assign("/newroom?username=" + un + "&passcode=" + pc);
+        }
+
+        function joinRoom() {
+            var un = document.getElementById("joinun").value;
+            var inv = document.getElementById("joininv").value;
+            var pc = document.getElementById("joinpc").value;
+            location.assign("/joinroom?username=" + un + "&invitation=" + inv + "&passcode=" + pc);
+        } 
+    </script>
+</body>
+</html>
