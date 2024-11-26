@@ -6,6 +6,7 @@
     <title>WebRTC 화상 회의</title>
     <link rel="icon" type="image/x-icon" href="../public/image-assets/logo-favicon.png">
     <link rel="stylesheet" href="../public/css/style-room.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -25,14 +26,63 @@
                         </div>
                     </div>
                     <div class="middle-left">
-    
+                        <!-- <video id="main-video" title="Double click to display fullscreen." ondblclick="fullscreen()" autoplay></video> -->
+                        <img src="../public/image-assets/user-large.png" id="main-video">
+                        <div id="video-grid">
+                            <div>
+                                <img src="../public/image-assets/user-mini-4.png" class="vid">
+                                <div class="label-mini-vid">kitae</div>
+                            </div>
+                            <div>
+                                <img src="../public/image-assets/user-mini-2.png" class="vid">
+                                <div class="label-mini-vid">Muslima</div>
+                            </div>
+                            <div>
+                                <img src="../public/image-assets/user-mini-3.png" class="vid">
+                                <div class="label-mini-vid">Muslima</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bot-left">
-                        
+                    <div id="bot-left">
+                        <div class="command-btn" id="audioControl" onclick="muteUnmute()">
+                            <i class="material-icons">&#xe029;</i>
+                            <p class="label">Mic</p>
+                        </div>
+                        <div class="command-btn" id="videoControl" onclick="playStop()">
+                            <i class="material-icons">&#xe04b;</i>
+                            <p class="label">Cam</p>
+                        </div>
+                        <div class="command-btn" id="shareControl" onclick="shareScreen()">
+                            <i class="material-icons">&#xe0df;</i>
+                            <p class="label" id="shareText">Share</p>
+                        </div>
+                        <div class="command-btn" id="recordControl" onclick="recordMeeting()">
+                            <i class="material-icons">&#xe061;</i>
+                            <p class="label">Record</p>
+                        </div>
                     </div>
                 </div> <!-- left-content end -->
-                <div class="right-content">
-
+                <div id="right-content">
+                    <p style="margin: 15px; padding: 12px 0px 0px 10px; font-weight: bold; color: #202020;">Chat with Friends</p>
+                    <div class="active"></div>
+                    <div id="info">
+                        <p style="color: #ffffff; font-size: 11pt; padding: 10px 0px 0px 12px; ">People in room:</p>
+                        <p style="color: #ffffff; font-size: 50pt; padding-left: 120px;" id="participant">4</p>
+                        <i class="material-icons" style="color: #ffffff; font-size: 40px; position: relative; bottom: 47px; left: 228px;">&#xe7fd;</i>
+                    </div>
+                    <div id="chatroom">
+                        
+                    </div>
+                    <div id="chatform">
+                        <label>
+                            <input type="file" id="file" style="display: none;" onchange="selectFile(this.value)">
+                            <i class="material-icons" style="font-size: 18px; color: #4f4f4f; float: left; margin-left: 10px; margin-top: 15px; transform: rotate(45deg); cursor: pointer;">&#xe226;</i>
+                        </label>
+                        <input id="textchat" type="text" placeholder="Type here ...">
+                        <button id="sendMessage" style="background-color: #fd6f13; border: none; margin-left: 8px; padding: 4px 3px 2px 3px; margin-top: 8px; border-radius: 6px; cursor: pointer;">
+                            <i class="material-icons" style="color: #ffffff; font-size: 25px; font-weight: bold;">&#xe315;</i>
+                        </button>
+                    </div>
                 </div> <!-- right-content end -->
             </div>
         </div>
