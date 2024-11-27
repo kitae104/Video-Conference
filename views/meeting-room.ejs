@@ -7,6 +7,9 @@
     <link rel="icon" type="image/x-icon" href="image-assets/logo-favicon.png">
     <link rel="stylesheet" href="css/style-room.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -26,10 +29,12 @@
                         </div>
                     </div>
                     <div class="middle-left">
-                        <!-- <video id="main-video" title="Double click to display fullscreen." ondblclick="fullscreen()" autoplay></video> -->
-                        <img src="image-assets/user-large.png" id="main-video">
+                        <video id="main-video" title="Double click to display fullscreen." ondblclick="fullscreen()" autoplay></video>
+                        <!-- <img src="image-assets/user-large.png" id="main-video"> -->
+                        
+                        <!-- 이부분 확인 필요!! 현재 관련된 내용이 보이지 않음 ㅠㅠ -->
                         <div id="video-grid">
-                            <div>
+                           <!--<div>
                                 <img src="image-assets/user-mini-4.png" class="vid">
                                 <div class="label-mini-vid">kitae</div>
                             </div>
@@ -40,7 +45,7 @@
                             <div>
                                 <img src="image-assets/user-mini-3.png" class="vid">
                                 <div class="label-mini-vid">Muslima</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div id="bot-left">
@@ -96,6 +101,8 @@
         let month = months[new Date().getMonth()];
         let year = new Date().getFullYear();
 
+        document.getElementById("date").innerHTML = `${year}년 ${month} ${date}일, ${day}`;
+
         const ROOM_ID = "<%= roomId %>";
         const USERNAME = "<%= username %>";
 
@@ -110,9 +117,10 @@
         symbol = "0123456789ABCDEF";
         color = "#";
         for(let i=0; i<6; i++){
-           color = color+symbol[Math.floor(Math.random()*16)];
+            color = color+symbol[Math.floor(Math.random()*16)];
         }
         const RANDOM_COLOR = color;
     </script>
+    <script src="webrtc-controller.js"></script>
 </body>
 </html>
