@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebRTC 화상 회의</title>
-    <link rel="icon" type="image/x-icon" href="../public/image-assets/logo-favicon.png">
-    <link rel="stylesheet" href="../public/css/style-frontpage.css">
+    <link rel="icon" type="image/x-icon" href="image-assets/logo-favicon.png">
+    <link rel="stylesheet" href="css/style-frontpage.css">
 </head>
 <body>
     <div id="container">
@@ -69,15 +69,15 @@
         }
 
         function newRoom() {
-            var un = document.getElementById("startun").value;
-            var pc = document.getElementById("startpc").value;
+            const un = document.getElementById("startun").value;
+            const pc = document.getElementById("startpc").value;
             location.assign("/newroom?username=" + un + "&passcode=" + pc);
         }
 
         function joinRoom() {
-            var un = document.getElementById("joinun").value;
-            var inv = document.getElementById("joininv").value;
-            var pc = document.getElementById("joinpc").value;
+            const un = document.getElementById("joinun").value;
+            const inv = document.getElementById("joininv").value;
+            const pc = document.getElementById("joinpc").value;
             location.assign("/joinroom?username=" + un + "&invitation=" + inv + "&passcode=" + pc);
         } 
     </script>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebRTC 화상 회의</title>
-    <link rel="icon" type="image/x-icon" href="../public/image-assets/logo-favicon.png">
-    <link rel="stylesheet" href="../public/css/style-room.css">
+    <link rel="icon" type="image/x-icon" href="image-assets/logo-favicon.png">
+    <link rel="stylesheet" href="css/style-room.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -15,7 +15,7 @@
                 <div class="left-content">
                     <div class="top-left">
                         <div class="logo">
-                            <img src="../public/image-assets/logo.png" style="height: 35px; margin-top: 12px;">
+                            <img src="image-assets/logo.png" style="height: 35px; margin-top: 12px;">
                         </div>
                         <div class="header">
                             <p style="margin: 0px; padding: 12px 0px 0px 10px; font-weight: bold;">WebRTC 화상 회의</p>
@@ -27,18 +27,18 @@
                     </div>
                     <div class="middle-left">
                         <!-- <video id="main-video" title="Double click to display fullscreen." ondblclick="fullscreen()" autoplay></video> -->
-                        <img src="../public/image-assets/user-large.png" id="main-video">
+                        <img src="image-assets/user-large.png" id="main-video">
                         <div id="video-grid">
                             <div>
-                                <img src="../public/image-assets/user-mini-4.png" class="vid">
+                                <img src="image-assets/user-mini-4.png" class="vid">
                                 <div class="label-mini-vid">kitae</div>
                             </div>
                             <div>
-                                <img src="../public/image-assets/user-mini-2.png" class="vid">
+                                <img src="image-assets/user-mini-2.png" class="vid">
                                 <div class="label-mini-vid">Muslima</div>
                             </div>
                             <div>
-                                <img src="../public/image-assets/user-mini-3.png" class="vid">
+                                <img src="image-assets/user-mini-3.png" class="vid">
                                 <div class="label-mini-vid">Muslima</div>
                             </div>
                         </div>
@@ -87,5 +87,32 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        const days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+        const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+        let day = days[new Date().getDay()];
+        let date = new Date().getDate();
+        let month = months[new Date().getMonth()];
+        let year = new Date().getFullYear();
+
+        const ROOM_ID = "<%= roomId %>";
+        const USERNAME = "<%= username %>";
+
+        function fullscreen() {
+            let mainVideo = document.getElementById("main-video");  
+            if (mainVideo.requestFullscreen) {
+                mainVideo.requestFullscreen();
+            }
+        }
+
+        let symbol, color;
+        symbol = "0123456789ABCDEF";
+        color = "#";
+        for(let i=0; i<6; i++){
+           color = color+symbol[Math.floor(Math.random()*16)];
+        }
+        const RANDOM_COLOR = color;
+    </script>
 </body>
 </html>
