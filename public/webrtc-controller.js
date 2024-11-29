@@ -51,7 +51,7 @@ let peerList = [];
 let peer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '8088'
+    port: '8080'
 }); 
 peer.on('open', id => {
     socket.emit('join-room', ROOM_ID, id);
@@ -60,21 +60,21 @@ peer.on('open', id => {
 })
 
 socket.on('user-connected', (peerId) => {
-    connecToOther(peerId, myVideoStream);
+    connectToOther(peerId, myVideoStream);
 })
 
 let sharedStream;
-const connecToOther = (peerId, stream) => {
+const connectToOther = (peerId, stream) => {
     const call = peer.call(peerId, stream);
     peerList[call.peer] = "";
     let i = 1;
     call.on('stream', userVideoStream => {
         if (i <= 1) {
             addVideo(call.peer, "", userVideoStream);
-            // let conn = peer.connect(peerId);
-            // conn.on('open', function () {
-            //     conn.send(myPeerId + "," + USERNAME);
-            // });
+            let conn = peer.connect(peerId);
+            conn.on('open', function () {
+                conn.send(myPeerId + "," + USERNAME);
+            });
         }
         i++;
     })
@@ -96,6 +96,14 @@ peer.on('call', call => {
         conn.on('open', function () {
             conn.send(myPeerId + "," + USERNAME);
         });
+    })
+
+    let i = 1;
+    call.on('stream', userVideoStream => {
+        if (i <= 1) {
+            addVideo(call.peer, "", userVideoStream);
+        }
+        i++;
     })
 
     peerList[call.peer] = "";
