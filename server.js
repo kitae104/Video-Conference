@@ -2,7 +2,7 @@ const express = require('express');
 const app = express(); 
 const server = require('http').Server(app); 
 const fs = require('fs'); 
-server.listen(process.env.PORT || 8088);
+server.listen(process.env.PORT || 8080);
 
 app.use(express.static('public'));  // 정적 파일은 public 폴더에 넣도록 설정 
 app.set('view engine', 'ejs');  // ejs를 사용하도록 설정
