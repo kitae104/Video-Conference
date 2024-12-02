@@ -10,6 +10,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
     <div class="container">
@@ -72,7 +74,7 @@
                     <div class="active"></div>
                     <div id="info">
                         <p style="color: #ffffff; font-size: 11pt; padding: 10px 0px 0px 12px; ">People in room:</p>
-                        <p style="color: #ffffff; font-size: 50pt; padding-left: 120px;" id="participant">4</p>
+                        <p style="color: #ffffff; font-size: 50pt; padding-left: 120px;" id="participant">0</p>
                         <i class="material-icons" style="color: #ffffff; font-size: 40px; position: relative; bottom: 47px; left: 228px;">&#xe7fd;</i>
                     </div>
                     <div id="chatroom">
@@ -93,7 +95,7 @@
         </div>
     </div>
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('contextmenu', event => event.preventDefault());  // 우클릭 방지
         const days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
         const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
         let day = days[new Date().getDay()];
@@ -113,6 +115,7 @@
             }
         }
 
+        // 사용자에 대한 랜덤 색상 생성
         let symbol, color;
         symbol = "0123456789ABCDEF";
         color = "#";
