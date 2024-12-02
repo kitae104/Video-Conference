@@ -61,7 +61,7 @@ app.get('/:room', (req, res) => {
 
 const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
-  debug: true
+    debug: true
 });
 app.use('/peerjs', peerServer);
 
@@ -70,5 +70,45 @@ io.on('connection', socket => {
     socket.on('join-room', (roomId, peerId) => {
         socket.join(roomId);
         socket.to(roomId).emit('user-connected', peerId);
+
+        // 화면 공유
+        socket.on('stop-screen-share', (peerId) => {
+            socket.to(roomId).emit('no-share', peerId);
+        });
+
+        // 채팅 기능
+        socket.on('message', (message, sender, color, time) => {
+            io.to(roomId).emit('createMessage', message, sender, color, time);
+        });
+
+        // 채팅방 나가기 
+        socket.on('leave-meeting', (peerId, peerName) => {
+            io.to(roomId).emit('user-leave', peerId, peerName);
+        });
+    });
+});
+
+app.post('/upload', (req, res) => {
+    let fileName = req.headers['file-name'];  // 요청 헤더에서 파일 이름 추출        
+
+    // 데이터 청크 수신 이벤트
+    req.on('data', (chunk) => {
+        fs.appendFileSync(__dirname + '/public/uploaded-files/' + fileName, chunk);
     })
+    
+    res.end('uploaded');
+
+    // req.on('data', (chunk) => {
+    //     // 수신된 청크 데이터를 파일에 추가(비동기 처리)
+    //     fs.appendFile(__dirname + '/public/uploaded-files/' + fileName, chunk, (err) => {
+    //         if (err) {
+    //             console.error('Error appending file:', err);
+    //             res.status(500).end('Error');
+    //         }
+    //     });
+    // });
+
+    // req.on('end', () => {
+    //     res.end('uploaded');
+    // });
 });
